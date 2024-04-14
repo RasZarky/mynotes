@@ -14,7 +14,7 @@ void main() {
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       useMaterial3: true,
     ),
-    home: const LoginPage(),
+    home: const Register(),
   ));
 }
 
@@ -80,11 +80,23 @@ class _RegisterState extends State<Register> {
                     onPressed: () async {
                       final email = _email.text;
                       final password = _password.text;
-                      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
-                      log(userCredential.toString());
+
+                      try{
+                        final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          email: email,
+                          password: password,
+                        );
+                        log(userCredential.toString());
+                      } on FirebaseAuthException catch(e){
+                        if(e.code == "weak-password"){
+                          log("weak password");
+                        }else if(e.code == "email-already-in-use"){
+                          log("email already in use");
+                        } else if(e.code == "invalid-email"){
+                          log("Invalid email");
+                        }
+                      }
+
                     },
                     child: const Text("Register"),
                   )

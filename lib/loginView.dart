@@ -66,11 +66,20 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () async {
                         final email = _email.text;
                         final password = _password.text;
-                        final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: email,
-                          password: password,
-                        );
-                        log(userCredential.toString());
+                        try{
+                          final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: email,
+                            password: password,
+                          );
+                          log(userCredential.toString());
+                        } on FirebaseAuthException catch(e){
+                          if(e.code == "user-not-found"){
+                            log("user not found");
+                          }else if(e.code == "wrong-password"){
+                            log("wrong password");
+                          }
+                        }
+
                       },
                       child: const Text("Login"),
                     )

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes/verify_email_view.dart';
 
 import 'firebase_options.dart';
 
@@ -27,6 +28,9 @@ class HomePage extends StatelessWidget {
                 log("user verified");
               } else{
                 log("user not verified");
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => const VerifyEmailView(),
+                ),);
               }
               return const Text("Done");
             default:

@@ -13,31 +13,36 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home Page"),
+    return FutureBuilder(
+      future: Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              // final user = FirebaseAuth.instance.currentUser;
-              // if (user!.emailVerified){
-              //   log("user verified");
-              // } else{
-              //   log("user not verified");
-              //   return const VerifyEmailView();
-              // }
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+            final  user = FirebaseAuth.instance.currentUser;
+            if (user != null){
+              if(user.emailVerified){
+                log("Email verified");
+              }else{
+                return const VerifyEmailView();
+              }
+            }else {
               return const LoginPage();
-            default:
-              return const Text("Loading");
-          }
+            }
+          // final user = FirebaseAuth.instance.currentUser;
+          // if (user!.emailVerified){
+          //   log("user verified");
+          // } else{
+          //   log("user not verified");
+          //   return const VerifyEmailView();
+          // }
+            return const Text("Done");
+          default:
+            return const CircularProgressIndicator();
+        }
 
-        },
-      ),
+      },
     );
   }
 }

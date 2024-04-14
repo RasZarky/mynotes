@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mynotes/home_page.dart';
+import 'package:mynotes/login_view.dart';
+import 'package:mynotes/register_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,5 +12,9 @@ void main() {
       useMaterial3: true,
     ),
     home: const HomePage(),
+    routes: {
+      "/login/": (context) => const LoginPage(),
+      "/register/": (context) => const Register(),
+    },
   ));
 }

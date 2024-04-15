@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes/constants/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  "/notes/",
+                  notesRoute,
                       (route) => false,);
 
               } on FirebaseAuthException catch(e){
@@ -82,7 +83,10 @@ class _LoginPageState extends State<LoginPage> {
           ),
           TextButton(
               onPressed: (){
-                Navigator.pushNamedAndRemoveUntil(context, "/register/", (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    registerRoute,
+                      (route) => false,);
               },
               child: const Text("Not registered? Click here to register"),
           ),

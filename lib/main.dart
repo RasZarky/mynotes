@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mynotes/home_page.dart';
-import 'package:mynotes/login_view.dart';
-import 'package:mynotes/notes_view.dart';
-import 'package:mynotes/register_view.dart';
+import 'package:mynotes/constants/routes.dart';
+import 'package:mynotes/views/home_page.dart';
+import 'package:mynotes/views/login_view.dart';
+import 'package:mynotes/views/notes_view.dart';
+import 'package:mynotes/views/register_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,9 +15,9 @@ void main() {
     ),
     home: const HomePage(),
     routes: {
-      "/login/": (context) => const LoginPage(),
-      "/register/": (context) => const Register(),
-      "/notes/": (context) => const NotesView(),
+      loginRoute: (context) => const LoginPage(),
+      registerRoute: (context) => const Register(),
+      notesRoute: (context) => const NotesView(),
     },
   ));
 }

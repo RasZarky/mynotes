@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 enum MenuAction { logout }
@@ -25,7 +28,14 @@ class _NotesViewState extends State<NotesView> {
                     )
                   ];
                 },
-              onSelected: (value){},
+              onSelected: (value) async {
+                  final logout = await showLogoutDialog(context);
+                  log(logout.toString());
+                  if(logout){
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushNamedAndRemoveUntil(context, "/login/", (route) => false);
+                  }
+              },
             )
         ],
       ),

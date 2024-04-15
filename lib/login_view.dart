@@ -57,11 +57,18 @@ class _LoginPageState extends State<LoginPage> {
               final email = _email.text;
               final password = _password.text;
               try{
-                final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                final userCredential = await FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
                   email: email,
                   password: password,
                 );
                 log(userCredential.toString());
+
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  "/notes/",
+                      (route) => false,);
+
               } on FirebaseAuthException catch(e){
                 if(e.code == "user-not-found"){
                   log("user not found");

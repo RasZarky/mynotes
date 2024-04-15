@@ -62,11 +62,13 @@ class _RegisterState extends State<Register> {
               final password = _password.text;
       
               try{
-                final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                await FirebaseAuth.instance.createUserWithEmailAndPassword(
                   email: email,
                   password: password,
                 );
-                log(userCredential.toString());
+                final user = FirebaseAuth.instance.currentUser;
+                await user?.sendEmailVerification();
+                Navigator.pushNamed(context, verifyEmailRoute);
               } on FirebaseAuthException catch(e){
                 if(e.code == "weak-password"){
                   log("weak password");

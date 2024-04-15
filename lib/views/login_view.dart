@@ -66,10 +66,18 @@ class _LoginPageState extends State<LoginPage> {
                 );
                 log(userCredential.toString());
 
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  notesRoute,
-                      (route) => false,);
+                final user = await FirebaseAuth.instance.currentUser;
+                if (user!.emailVerified){
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    notesRoute,
+                        (route) => false,);
+                }else {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    verifyEmailRoute,
+                        (route) => false,);
+                }
 
               } on FirebaseAuthException catch(e){
                 if(e.code == "user-not-found"){

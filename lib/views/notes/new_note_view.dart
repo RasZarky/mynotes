@@ -30,7 +30,7 @@ class _NewNoteViewState extends State<NewNoteView> {
     }
     final currentUser = AuthService.firebase().currentsUser;
     final email = currentUser?.email;
-    final owner = await _notesService.getUser(email: email);
+    final owner = await _notesService.getUser(email: email.toString());
     return await _notesService.createNote(owner: owner);
   }
 
@@ -88,7 +88,7 @@ class _NewNoteViewState extends State<NewNoteView> {
           builder: (context, snapshot){
             switch(snapshot.connectionState){
               case ConnectionState.done:
-                _note = snapshot.data as DatabaseNotes;
+                _note = snapshot.data;
                 _setupControllerListener();
                 return TextField(
                   controller: _textEditingController,

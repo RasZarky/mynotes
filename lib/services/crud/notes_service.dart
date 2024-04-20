@@ -147,14 +147,14 @@ class NotesService {
     return note;
   }
 
-  Future<DatabaseUser> getUser({required String? email}) async {
+  Future<DatabaseUser> getUser({required String email}) async {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final results = await db.query(
       userTable,
       limit: 1,
       where: "email = ?",
-      whereArgs: [email?.toLowerCase()],
+      whereArgs: [email.toLowerCase()],
     );
 
     if (results.isEmpty){

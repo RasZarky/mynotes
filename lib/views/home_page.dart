@@ -5,7 +5,7 @@ import 'package:mynotes/views/verify_email_view.dart';
 import 'login_view.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +14,19 @@ class HomePage extends StatelessWidget {
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
-            final  user = AuthService.firebase().currentsUser;
-            if (user != null){
-              if(user.isEmailVerified){
+            final user = AuthService.firebase().currentsUser;
+            if (user != null) {
+              if (user.isEmailVerified) {
                 return const NotesView();
-              }else{
+              } else {
                 return const VerifyEmailView();
               }
-            }else {
+            } else {
               return const LoginPage();
             }
           default:
             return const CircularProgressIndicator();
         }
-
       },
     );
   }

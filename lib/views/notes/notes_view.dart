@@ -42,11 +42,22 @@ class _NotesViewState extends State<NotesView> {
             if (snapshot.hasData) {
               final noteCount = snapshot.data ?? 0;
               final text = context.loc.notes_title(noteCount);
-              return Text(text);
+              return Text(
+                  text,
+                  style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                ),
+              );
             } else {
               return const Text('');
             }
           },
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(
+          color: Colors.black,
         ),
         actions: [
           IconButton(

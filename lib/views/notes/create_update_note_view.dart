@@ -95,6 +95,15 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
       appBar: AppBar(
         title: Text(
           context.loc.note,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(
+          color: Colors.black,
         ),
         actions: [
           IconButton(
@@ -116,12 +125,29 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               _setupTextControllerListener();
-              return TextField(
-                controller: _textController,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintText: context.loc.start_typing_your_note,
+              return SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.only(
+                    top: 15,
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: TextField(
+                    controller: _textController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    cursorColor: Colors.black,
+                    style: const TextStyle(
+                      fontSize: 22.0,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: context.loc.start_typing_your_note,
+                      hintStyle: const TextStyle(
+                        fontSize: 22,
+                      ),
+                      border: InputBorder.none
+                    ),
+                  ),
                 ),
               );
             default:

@@ -43,7 +43,7 @@
     "register_error_email_already_in_use": "This email is already registered to another user. Please choose another email!",
     "register_error_generic": "Failed to register. Please try again later!",
     "register_error_invalid_email": "The email address you entered appears to be invalid. Please try another email address!",
-    "register_view_prompt": "Enter your email and password to see your notes!",
+    "register_view_prompt": "Enter your email and password to register!",
     "register_view_already_registered": "Already registered? Login here!",
 
     "verify_email_view_prompt": "We've sent you an email verification. Please open it to verify your account. If you haven't received a verification email yet, press the button below!",

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/services/auth/auth_exceptions.dart';
-import 'package:mynotes/services/auth/auth_service.dart';
+import 'package:mynotes/services/auth/bloc/auth_bloc.dart';
+import 'package:mynotes/services/auth/bloc/auth_event.dart';
+import 'package:mynotes/utilities/dialogs/error_dialog.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../utilities/dialogs/error_dialog.dart';
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
 
@@ -34,16 +35,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text('Login'),
       ),
       body: Column(
         children: [
           TextField(
             controller: _email,
+            enableSuggestions: false,
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
-                hintText: "Enter email"
+              hintText: 'Enter your email here',
             ),
           ),
           TextField(
@@ -52,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
             enableSuggestions: false,
             autocorrect: false,
             decoration: const InputDecoration(
-                hintText: "Enter password"
+              hintText: 'Enter your password here',
             ),
           ),
           TextButton(
@@ -60,41 +62,40 @@ class _LoginPageState extends State<LoginPage> {
               final email = _email.text;
               final password = _password.text;
               try {
-                await AuthService.firebase().login(
-                    email: email, password: password);
-                final user = AuthService
-                    .firebase()
-                    .currentsUser;
-                if (user!.isEmailVerified) {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    notesRoute,
-                        (route) => false,);
-                } else {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    verifyEmailRoute,
-                        (route) => false,);
-                }
-              } on UserNotFoundAuthException{
-                await showErrorDialog(context, "User not found",);
-              } on WrongPasswordAuthException{
-                await showErrorDialog(context, "wrong password",);
-              } on GenericAuthException{
-                await showErrorDialog(context, "Authentication Error",);
+                context.read<AuthBloc>().add(
+                  AuthEventLogIn(
+                    email,
+                    password,
+                  ),
+                );
+              } on UserNotFoundAuthException {
+                await showErrorDialog(
+                  context,
+                  'User not found',
+                );
+              } on WrongPasswordAuthException {
+                await showErrorDialog(
+                  context,
+                  'Wrong credentials',
+                );
+              } on GenericAuthException {
+                await showErrorDialog(
+                  context,
+                  'Authentication error',
+                );
               }
             },
-            child: const Text("Login"),
+            child: const Text('Login'),
           ),
           TextButton(
-              onPressed: (){
-                Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    registerRoute,
-                      (route) => false,);
-              },
-              child: const Text("Not registered? Click here to register"),
-          ),
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                registerRoute,
+                    (route) => false,
+              );
+            },
+            child: const Text('Not registered yet? Register here!'),
+          )
         ],
       ),
     );

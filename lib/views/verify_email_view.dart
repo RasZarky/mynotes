@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/extensions/buildcontext/loc.dart';
 import 'package:mynotes/services/auth/bloc/auth_bloc.dart';
@@ -15,17 +16,88 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.loc.verify_email),
-      ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                context.loc.verify_email_view_prompt,
+
+            Container(
+              height: MediaQuery.of(context).size.height * 0.60,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/image/background.png"),
+                  fit: BoxFit.fill,
+                ),
               ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 30,
+                    width: 80,
+                    height: 200,
+                    child: FadeInUp(
+                        duration: const Duration(seconds: 1),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/image/light-1.png')
+                              )
+                          ),
+                        )),
+                  ),
+                  Positioned(
+                    left: 140,
+                    width: 80,
+                    height: 150,
+                    child: FadeInUp(
+                        duration: const Duration(milliseconds: 1200),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/image/light-2.png')
+                              )
+                          ),
+                        )),
+                  ),
+                  Positioned(
+                    right: 40,
+                    top: 40,
+                    width: 80,
+                    height: 150,
+                    child: FadeInUp(
+                        duration: const Duration(milliseconds: 1300),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/image/clock.png')
+                              )
+                          ),
+                        )),
+                  ),
+                  Positioned(
+                    child: FadeInUp(
+                        duration: const Duration(milliseconds: 1600),
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 50),
+                          child: Center(
+                            child: Text(
+                              context.loc.verify_email,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 40,
+                                  fontWeight:
+                                  FontWeight.bold
+                              ),
+                            ),
+                          ),
+                        )),
+                  )
+                ],
+              ),
+            ),
+
+            Text(
+              context.loc.verify_email_view_prompt,
             ),
             TextButton(
               onPressed: () {

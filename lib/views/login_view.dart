@@ -149,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
               ),
 
               Padding(
-                padding: EdgeInsets.all(30.0),
+                padding: const EdgeInsets.all(30.0),
                 child: Column(
                   children: [
                     FadeInUp(
@@ -175,7 +175,9 @@ class _LoginViewState extends State<LoginView> {
                               Container(
                                 padding: const EdgeInsets.all(8.0),
                                 decoration: const BoxDecoration(
-                                    border: Border(bottom: BorderSide(color:  Color.fromRGBO(143, 148, 251, 1)))
+                                    border: Border(bottom: BorderSide(
+                                        color:  Color.fromRGBO(
+                                            143, 148, 251, 1)))
                                 ),
                                 child: TextField(
                                   controller: _email,

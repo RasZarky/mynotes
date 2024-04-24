@@ -181,7 +181,7 @@ class _LoginViewState extends State<LoginView> {
                                 ),
                                 child: TextField(
                                   controller: _email,
-                                  enableSuggestions: false,
+                                  enableSuggestions: true,
                                   autocorrect: false,
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
@@ -222,38 +222,41 @@ class _LoginViewState extends State<LoginView> {
 
               FadeInUp(
                   duration: const Duration(milliseconds: 1900),
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: const LinearGradient(
-                        colors: [
-                          Color.fromRGBO(143, 148, 251, 1),
-                          Color.fromRGBO(143, 148, 251, .6),
-                        ]
-                    )
-                    ),
-                    child: Center(
-                      child: TextButton(
-                        onPressed: () async {
-                          final email = _email.text;
-                          final password = _password.text;
-                          context.read<AuthBloc>().add(
-                            AuthEventLogIn(
-                              email,
-                              password,
-                            ),
-                          );
-                        },
-                        child: Text(
-                          context.loc.login,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: const LinearGradient(
+                          colors: [
+                            Color.fromRGBO(143, 148, 251, 1),
+                            Color.fromRGBO(143, 148, 251, .6),
+                          ]
+                      )
                       ),
-                ),
-              )),
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () async {
+                            final email = _email.text;
+                            final password = _password.text;
+                            context.read<AuthBloc>().add(
+                              AuthEventLogIn(
+                                email,
+                                password,
+                              ),
+                            );
+                          },
+                          child: Text(
+                            context.loc.login,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                                    ),
+                                  ),
+                  )),
 
               const SizedBox(height: 5,),
 

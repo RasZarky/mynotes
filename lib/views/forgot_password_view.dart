@@ -193,30 +193,33 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
               FadeInUp(
                   duration: const Duration(milliseconds: 1900),
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(143, 148, 251, 1),
-                              Color.fromRGBO(143, 148, 251, .6),
-                            ]
-                        )
-                    ),
-                    child: Center(
-                      child: TextButton(
-                        onPressed: () async {
-                          final email = _controller.text;
-                          context
-                              .read<AuthBloc>()
-                              .add(AuthEventForgotPassword(email: email));
-                        },
-                        child: Text(
-                          context.loc.forgot_password_view_send_me_link,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(143, 148, 251, 1),
+                                Color.fromRGBO(143, 148, 251, .6),
+                              ]
+                          )
+                      ),
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () async {
+                            final email = _controller.text;
+                            context
+                                .read<AuthBloc>()
+                                .add(AuthEventForgotPassword(email: email));
+                          },
+                          child: Text(
+                            context.loc.forgot_password_view_send_me_link,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ),

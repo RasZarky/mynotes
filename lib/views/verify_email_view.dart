@@ -112,29 +112,32 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
 
             FadeInUp(
                 duration: const Duration(milliseconds: 1900),
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(143, 148, 251, 1),
-                            Color.fromRGBO(143, 148, 251, .6),
-                          ]
-                      )
-                  ),
-                  child: Center(
-                    child: TextButton(
-                      onPressed: () async {
-                        context.read<AuthBloc>().add(
-                          const AuthEventSendEmailVerification(),
-                        );
-                      },
-                      child: Text(
-                        context.loc.verify_email_send_email_verification,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: const LinearGradient(
+                            colors: [
+                              Color.fromRGBO(143, 148, 251, 1),
+                              Color.fromRGBO(143, 148, 251, .6),
+                            ]
+                        )
+                    ),
+                    child: Center(
+                      child: TextButton(
+                        onPressed: () async {
+                          context.read<AuthBloc>().add(
+                            const AuthEventSendEmailVerification(),
+                          );
+                        },
+                        child: Text(
+                          context.loc.verify_email_send_email_verification,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),

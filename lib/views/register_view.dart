@@ -156,7 +156,7 @@ class _RegisterViewState extends State<RegisterView> {
               ),
 
               Padding(
-                padding: EdgeInsets.all(30.0),
+                padding: const EdgeInsets.all(30.0),
                 child: Column(
                   children: [
                     FadeInUp(
@@ -228,34 +228,37 @@ class _RegisterViewState extends State<RegisterView> {
 
               FadeInUp(
                   duration: const Duration(milliseconds: 1900),
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(143, 148, 251, 1),
-                              Color.fromRGBO(143, 148, 251, .6),
-                            ]
-                        )
-                    ),
-                    child: Center(
-                      child: TextButton(
-                        onPressed: () async {
-                          final email = _email.text;
-                          final password = _password.text;
-                          context.read<AuthBloc>().add(
-                            AuthEventRegister(
-                              email,
-                              password,
-                            ),
-                          );
-                        },
-                        child: Text(
-                          context.loc.register,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(143, 148, 251, 1),
+                                Color.fromRGBO(143, 148, 251, .6),
+                              ]
+                          )
+                      ),
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () async {
+                            final email = _email.text;
+                            final password = _password.text;
+                            context.read<AuthBloc>().add(
+                              AuthEventRegister(
+                                email,
+                                password,
+                              ),
+                            );
+                          },
+                          child: Text(
+                            context.loc.register,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ),
@@ -263,16 +266,19 @@ class _RegisterViewState extends State<RegisterView> {
 
               FadeInUp(
                   duration: const Duration(milliseconds: 2000),
-                  child: TextButton(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(
-                        const AuthEventLogOut(),
-                      );
-                    },
-                    child: Text(
-                      context.loc.register_view_already_registered,
-                      style: const TextStyle(
-                          color: Color.fromRGBO(143, 148, 251, 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: TextButton(
+                      onPressed: () {
+                        context.read<AuthBloc>().add(
+                          const AuthEventLogOut(),
+                        );
+                      },
+                      child: Text(
+                        context.loc.register_view_already_registered,
+                        style: const TextStyle(
+                            color: Color.fromRGBO(143, 148, 251, 1)),
+                      ),
                     ),
                   )
               ),

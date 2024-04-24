@@ -24,7 +24,7 @@ void main() {
     });
 
     test("User should be null after initialization", () {
-      expect(provider.currentsUser, null);
+      expect(provider.currentUser, null);
     });
     
     test("should be able to initialise in less than 2 seconds", () async {
@@ -48,13 +48,13 @@ void main() {
       final user = await provider.createUser(
           email: "foo",
           password: "bar",);
-      expect(provider.currentsUser, user);
+      expect(provider.currentUser, user);
       expect(user.isEmailVerified, false);
     });
     
     test("logged in user should be able to get verified", () {
       provider.sendEmailVerification();
-      final user = provider.currentsUser;
+      final user = provider.currentUser;
       expect(user, isNotNull);
       expect(user?.isEmailVerified, true);
     });
@@ -65,7 +65,7 @@ void main() {
           email: "email",
           password: "password",
       );
-      final user = provider.currentsUser;
+      final user = provider.currentUser;
       expect(user, isNotNull);
     });
   });
@@ -87,7 +87,7 @@ class MockAuthProvider implements AuthProvider{
   }
 
   @override
-  AuthUser? get currentsUser => _user;
+  AuthUser? get currentUser => _user;
 
   @override
   Future<void> initialize() async {

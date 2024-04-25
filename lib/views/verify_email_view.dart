@@ -113,7 +113,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
             FadeInUp(
                 duration: const Duration(milliseconds: 1900),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.only(left: 30, right: 30),
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
